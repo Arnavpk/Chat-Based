@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
 import path from "path";
 import { fileURLToPath } from "url";
+import { connectDB } from './lib/db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // const __dirname = path.resolve();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());  // Middleware to parse JSON bodies. (req.body)
 
 // app.get('/', (req, res) => {
 //     res.send('Hello World!');
@@ -40,5 +43,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV}`);
+    console.log(`MongoDB URI: ${process.env.MONGODB_URI}`);
+    connectDB();
 });
