@@ -45,4 +45,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     console.log(`MongoDB URI: ${process.env.MONGODB_URI}`);
     connectDB();
+    console.log("ALL ENV KEYS:", Object.keys(process.env));
+    console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY);
+
 });

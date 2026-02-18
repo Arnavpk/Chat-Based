@@ -1,15 +1,20 @@
-import { Resend } from 'resend';
-import dotenv from 'dotenv';
+import { Resend } from "resend";
 
-dotenv.config();
+let resendClient;
 
-if (!process.env.RESEND_API_KEY) {
-    throw new Error('RESEND API key is not defined in environment variables');
-}
+export const getResendClient = () => {
+    if (!resendClient) {
+        if (!process.env.RESEND_API_KEY) {
+            throw new Error("RESEND_API_KEY is missing");
+        }
 
-export const resendClient = new Resend(process.env.RESEND_API_KEY);
+        resendClient = new Resend(process.env.RESEND_API_KEY);
+    }
+
+    return resendClient;
+};
 
 export const sender = {
-    email: process.env.Email_From,
-    name: process.env.Email_From_Name
-}
+    email: process.env.EMAIL_FROM,
+    name: process.env.EMAIL_FROM_NAME,
+};
